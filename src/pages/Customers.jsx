@@ -7,8 +7,12 @@ const Customers = () => {
   const { products, updateStock } = useInventory();
 
   const handleCustomerOrder = (id, qty) => {
-    // Validación simple
-    const product = products.find(p => p.id === parseInt(id));
+    
+    if (!products || products.length === 0) return; // Validación extra
+
+    const product = products.find(p => p.idProduct === parseInt(id));
+    if (!product) return;
+
     if (product.stock < qty) {
       alert("Error: Stock insuficiente para realizar el envío.");
       return;

@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard';
 import { useInventory } from '../hooks/useInventory';
 
 const Inventory = () => {
-  const { products, loading, searchProducts } = useInventory();
+  const { products, suppliers, loading, searchProducts } = useInventory();
   
   const [filtered, setFiltered] = useState([]);
 
@@ -27,7 +27,11 @@ const Inventory = () => {
       ) : (
         <div className="inventory-grid">
           {filtered.map(p => (
-            <ProductCard key={p.id} product={p} />
+            <ProductCard 
+            key={p.id} 
+            product={p} 
+            suppliers={suppliers || []} // Aseguramos que siempre sea al menos un array vacío
+            />
           ))}
           {filtered.length === 0 && <p>No se encontraron productos.</p>}
         </div>

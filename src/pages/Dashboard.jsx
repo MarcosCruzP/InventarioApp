@@ -4,8 +4,9 @@ import StatsCard from '../components/StatsCard';
 import { useInventory } from '../hooks/useInventory';
 
 const Dashboard = () => {
-  const { products } = useInventory();
+  const { products, loading } = useInventory();
 
+  if (loading) return <p>Cargando estadísticas...</p>;
   // Cálculos simples para el dashboard
   const totalItems = products.reduce((acc, curr) => acc + curr.stock, 0);
   const lowStockItems = products.filter(p => p.stock < 10).length;
